@@ -9,7 +9,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "rm -fr build && tsc",
+    "build": "rm -fr build && tsc --declaration",
     "test": "jest && karma start --single-run"
   },
   "devDependencies": {
