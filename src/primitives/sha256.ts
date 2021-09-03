@@ -1,10 +1,10 @@
-let nodeCrypto: any = null;
+let nodeCrypto: (typeof import('crypto')) | null = null;
 if (typeof window === 'undefined') {
     nodeCrypto = require('crypto');
 }
 
 export async function sha256(source: Buffer | string): Promise<Buffer> {
-    if (typeof window === 'undefined') {
+    if (nodeCrypto) {
         return nodeCrypto.createHash('sha256').update(source).digest();
     } else {
         if (typeof source === 'string') {
