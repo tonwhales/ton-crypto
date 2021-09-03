@@ -1,13 +1,13 @@
-# TON blockchain crypto primitives for NodeJS and Browser
+# TON crypto
 
-Cross-platform crypto primitives for building TON apps. Uses native crypto available in NodeJS or in browser.
+Cross-platform crypto primitives for building apps for TON blockchain. Uses native crypto available in NodeJS or in browser.
 
 ## Features
 
-- 🦺Crypto primitives: SHA-256, SHA-512, PBKDF2-SHA-256, HMAC-SHA-512
-- 🚀Promise-based API
-- 🏎Built on top of Buffer (polifil required in browsers)
-- 🍰No reimplemented crypto
+- 🦺 Crypto primitives: SHA-256, SHA-512, PBKDF2-SHA-256, HMAC-SHA-512
+- 🚀 Promise-based API
+- 🏎 Built on top of Buffer (polifil required in browsers)
+- 🍰 No reimplemented crypto
 
 ## Install
 
