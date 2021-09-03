@@ -1,7 +1,4 @@
-let nodeCrypto: (typeof import('crypto')) | null = null;
-if (typeof window === 'undefined') {
-    nodeCrypto = require('crypto');
-}
+const nodeCrypto: (typeof import('crypto')) = typeof window === 'undefined' ? require('crypto') : null;
 
 export async function sha256(source: Buffer | string): Promise<Buffer> {
     if (nodeCrypto) {
