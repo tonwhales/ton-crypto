@@ -1,6 +1,7 @@
 # TON crypto
 
 [![Version npm](https://img.shields.io/npm/v/ton-crypto.svg?logo=npm)](https://www.npmjs.com/package/ton-crypto)
+
 Cross-platform crypto primitives for building apps for TON blockchain. Uses native crypto available in NodeJS or in browser.
 
 ## Features
