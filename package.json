@@ -1,6 +1,6 @@
 {
   "name": "ton-crypto",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "repository": "https://github.com/ex3ndr/ton-crypto.git",
   "author": "Steve Korshakov <steve@korshakov.com>",
   "license": "MIT",
@@ -15,6 +15,7 @@
   "devDependencies": {
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.10",
+    "buffer": "^6.0.3",
     "expect": "^27.1.0",
     "jest": "^27.1.0",
     "jest-mock": "^27.1.0",
@@ -26,8 +27,7 @@
     "ts-jest": "^27.0.5",
     "ts-loader": "^9.2.5",
     "typescript": "^4.4.2",
-    "webpack": "^5.51.2",
-    "buffer": "^6.0.3"
+    "webpack": "^5.51.2"
   },
   "dependencies": {
     "tweetnacl": "^1.0.3"
