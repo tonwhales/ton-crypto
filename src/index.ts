@@ -5,5 +5,5 @@ export { hmac_sha512 } from './primitives/hmac_sha512';
 export { getSecureRandomBytes, getSecureRandomWords } from './primitives/getSecureRandom';
 export { mnemonicNew, mnemonicValidate, mnemonicToPrivateKey, mnemonicToWalletKey } from './mnemonic/mnemonic';
 export { wordlist as mnemonicWordList } from './mnemonic/wordlist';
-export { KeyPair } from './primitives/nacl';
+export { KeyPair, sealBox, openBox } from './primitives/nacl';
 export { keyPairFromSecretKey, sign } from './primitives/nacl';

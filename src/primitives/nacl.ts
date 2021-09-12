@@ -17,3 +17,15 @@ export function keyPairFromSecretKey(secretKey: Buffer): KeyPair {
 export function sign(data: Buffer, secretKey: Buffer) {
     return Buffer.from(nacl.sign.detached(new Uint8Array(data), new Uint8Array(secretKey)));
 }
+
+export function sealBox(data: Buffer, nonce: Buffer, key: Buffer) {
+    return Buffer.from(nacl.secretbox(data, nonce, key));
+}
+
+export function openBox(data: Buffer, nonce: Buffer, key: Buffer) {
+    let res = nacl.secretbox.open(data, nonce, key);
+    if (!res) {
+        return null;
+    }
+    return Buffer.from(res);
+}

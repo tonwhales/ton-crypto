@@ -30,6 +30,6 @@
     "webpack": "^5.51.2"
   },
   "dependencies": {
-    "tweetnacl": "^1.0.3"
+    "tweetnacl": "1.0.3"
   }
 }
