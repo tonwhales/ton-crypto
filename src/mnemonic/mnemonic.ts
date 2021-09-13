@@ -39,7 +39,7 @@ async function isPasswordSeed(entropy: Buffer | string) {
     return seed[0] == 1;
 }
 
-async function mnemonicToEntropy(mnemonicArray: string[], password?: string | null | undefined) {
+export async function mnemonicToEntropy(mnemonicArray: string[], password?: string | null | undefined) {
     // https://github.com/ton-blockchain/ton/blob/24dc184a2ea67f9c47042b4104bbb4d82289fac1/tonlib/tonlib/keys/Mnemonic.cpp#L52
     // td::SecureString Mnemonic::to_entropy() const {
     //   td::SecureString res(64);
@@ -49,7 +49,7 @@ async function mnemonicToEntropy(mnemonicArray: string[], password?: string | nu
     return await hmac_sha512(mnemonicArray.join(' '), password && password.length > 0 ? password : '');
 }
 
-async function mnemonicToSeed(mnemonicArray: string[], password?: string | null | undefined) {
+export async function mnemonicToSeed(mnemonicArray: string[], seed: string, password?: string | null | undefined) {
     // https://github.com/ton-blockchain/ton/blob/24dc184a2ea67f9c47042b4104bbb4d82289fac1/tonlib/tonlib/keys/Mnemonic.cpp#L58
     // td::SecureString Mnemonic::to_seed() const {
     //   td::SecureString hash(64);
@@ -57,8 +57,8 @@ async function mnemonicToSeed(mnemonicArray: string[], password?: string | null 
     //   return hash;
     // }
     const entropy = await mnemonicToEntropy(mnemonicArray, password);
-    const seed = await pbkdf2_sha512(entropy, "TON default seed", PBKDF_ITERATIONS, 64);
-    return seed.slice(0, 32);
+    const res = await pbkdf2_sha512(entropy, seed, PBKDF_ITERATIONS, 64);
+    return res.slice(0, 32);
 }
 
 /**
@@ -73,7 +73,7 @@ export async function mnemonicToPrivateKey(mnemonicArray: string[], password?: s
     //   return td::Ed25519::PrivateKey(td::SecureString(as_slice(to_seed()).substr(0, td::Ed25519::PrivateKey::LENGTH)));
     // }
     mnemonicArray = normalizeMnemonic(mnemonicArray);
-    const seed = (await mnemonicToSeed(mnemonicArray, password));
+    const seed = (await mnemonicToSeed(mnemonicArray, 'TON default seed', password));
     let keyPair = nacl.sign.keyPair.fromSeed(seed);
     return {
         publicKey: Buffer.from(keyPair.publicKey),

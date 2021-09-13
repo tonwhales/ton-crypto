@@ -3,7 +3,7 @@ export { sha512 } from './primitives/sha512';
 export { pbkdf2_sha512 } from './primitives/pbkdf2_sha512';
 export { hmac_sha512 } from './primitives/hmac_sha512';
 export { getSecureRandomBytes, getSecureRandomWords } from './primitives/getSecureRandom';
-export { mnemonicNew, mnemonicValidate, mnemonicToPrivateKey, mnemonicToWalletKey } from './mnemonic/mnemonic';
+export { mnemonicNew, mnemonicValidate, mnemonicToPrivateKey, mnemonicToWalletKey, mnemonicToSeed } from './mnemonic/mnemonic';
 export { wordlist as mnemonicWordList } from './mnemonic/wordlist';
 export { KeyPair, sealBox, openBox } from './primitives/nacl';
 export { keyPairFromSecretKey, sign } from './primitives/nacl';
