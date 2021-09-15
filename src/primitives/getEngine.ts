@@ -6,7 +6,9 @@ export function getEngine(): { type: 'browser' } | { type: 'node', crypto: typeo
             pname += x[i];
         };
         return { type: 'node', crypto: require(pname) };
-    } else {
+    } else if (typeof window.crypto !== 'undefined' && typeof window.crypto.subtle !== 'undefined') {
         return { type: 'browser' };
+    } else {
+        return { type: 'fallback' };
     }
 }
