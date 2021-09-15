@@ -772,11 +772,6 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-"@ygoe/msgpack@1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@ygoe/msgpack/-/msgpack-1.0.3.tgz#3889f4c0c2d68b2be83e1f6f4444efab02d6f257"
-  integrity sha512-Sjp0O/sNgOJxTOO1c2Zuu7nsHRIGu2iGPYyhUedKKbcHyUl73jbCaomEFJZHNb/6i94B+ZNZHVnFgpo0ENSXxQ==
-
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.5.tgz#c0b678fb32d60fc1219c784d6a826fe385aeb79a"
@@ -997,7 +992,7 @@ base64-arraybuffer@0.1.4:
   resolved "https://registry.yarnpkg.com/base64-arraybuffer/-/base64-arraybuffer-0.1.4.tgz#9818c79e059b1355f97e0428a017c838e90ba812"
   integrity sha1-mBjHngWbE1X5fgQooBfIOOkLqBI=
 
-base64-js@^1.3.1:
+base64-js@^1.3.0, base64-js@^1.3.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
@@ -1865,6 +1860,18 @@ expect@^27.1.0:
     jest-message-util "^27.1.0"
     jest-regex-util "^27.0.6"
 
+expo-crypto@^9.2.0:
+  version "9.2.0"
+  resolved "https://registry.yarnpkg.com/expo-crypto/-/expo-crypto-9.2.0.tgz#5d124539836767c019297816f050b8bb73056297"
+  integrity sha512-jc9E7jHlOT8fYs64DIsSOdnLtxtIK1pV78O/nBamPwKdGrvFSNqMSFndxyVSuEimBNoPPNRwN+4Pb4W1RRltJA==
+
+expo-random@^11.2.0:
+  version "11.2.0"
+  resolved "https://registry.yarnpkg.com/expo-random/-/expo-random-11.2.0.tgz#245ff64c1d980fb45caa84e92ae396af0fd3c88e"
+  integrity sha512-kgBJBB02iCX/kpoTHN57V7b4hWOCj4eACIQDl7bN94lycUcZu62T00P/rVZIcE/29x0GAi+Pw5ZWj0NlqBsMQQ==
+  dependencies:
+    base64-js "^1.3.0"
+
 extend@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
@@ -1943,11 +1950,6 @@ form-data@^3.0.0:
     asynckit "^0.4.0"
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
-
-fp-ts@2.11.1:
-  version "2.11.1"
-  resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.11.1.tgz#b1eeb2540728b6328542664888442f8f805d2443"
-  integrity sha512-CJOfs+Heq/erkE5mqH2mhpsxCKABGmcLyeEwPxtbTlkLkItGUs6bmk2WqjB2SgoVwNwzTE5iKjPQJiq06CPs5g==
 
 fs-extra@^8.1.0:
   version "8.1.0"
@@ -2213,11 +2215,6 @@ internal-slot@^1.0.3:
     get-intrinsic "^1.1.0"
     has "^1.0.3"
     side-channel "^1.0.4"
-
-io-ts@2.2.16:
-  version "2.2.16"
-  resolved "https://registry.yarnpkg.com/io-ts/-/io-ts-2.2.16.tgz#597dffa03db1913fc318c9c6df6931cb4ed808b2"
-  integrity sha512-y5TTSa6VP6le0hhmIyN0dqEXkrZeJLeC5KApJq6VLci3UEKF80lZ+KuoUs02RhBxNWlrqSNxzfI7otLX1Euv8Q==
 
 is-arguments@^1.0.4:
   version "1.1.1"

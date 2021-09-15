@@ -24,7 +24,13 @@ yarn add ton-crypto buffer
 require("buffer");
 ```
 
-## Methods
+## React Native
+To make it work on react native some native modules are required:
+`
+expo install expo-crypto expo-random
+`
+
+## Hashing
 All methods accept strings or Buffers as arguments.
 
 ```js
