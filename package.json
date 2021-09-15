@@ -16,6 +16,7 @@
   "devDependencies": {
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.10",
+    "@types/sjcl": "^1.0.30",
     "buffer": "^6.0.3",
     "expect": "^27.1.0",
     "jest": "^27.1.0",
@@ -31,6 +32,7 @@
     "webpack": "^5.51.2"
   },
   "dependencies": {
+    "sjcl": "^1.0.8",
     "tweetnacl": "1.0.3"
   }
 }

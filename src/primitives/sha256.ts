@@ -1,3 +1,4 @@
+import sjcl from 'sjcl';
 import { getEngine } from "./getEngine";
 
 export async function sha256(source: Buffer | string): Promise<Buffer> {
@@ -16,8 +17,9 @@ export async function sha256(source: Buffer | string): Promise<Buffer> {
         } else {
             src = source.toString('base64');
         }
-        let res = await engine.crypto.digestStringAsync(engine.crypto.CryptoDigestAlgorithm.SHA256, src, { encoding: engine.crypto.CryptoEncoding.BASE64 });
-        return Buffer.from(res, 'base64');
+        var bitArray = sjcl.codec.base64.toBits(src);
+        let hash = sjcl.hash.sha256.hash(bitArray);
+        return Buffer.from(sjcl.codec.base64.fromBits(hash), 'base64');
     } else {
         throw Error('Unsupported');
     }

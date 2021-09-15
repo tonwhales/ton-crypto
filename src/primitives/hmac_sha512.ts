@@ -1,3 +1,4 @@
+import sjcl from 'sjcl';
 import { getEngine } from './getEngine';
 
 export async function hmac_sha512(key: string | Buffer, data: string | Buffer): Promise<Buffer> {
