@@ -1,4 +1,4 @@
-const nodeCrypto: (typeof import('crypto')) = typeof window === 'undefined' ? require('crypto') : null;
+const nodeCrypto: (typeof import('crypto')) = typeof window === 'undefined' ? require('c' + 'r' + 'y' + 'p' + 't' + 'o') : null;
 const expoCrypto: (typeof import('expo-crypto')) = (typeof navigator !== 'undefined' && navigator.product == 'ReactNative') ? require('expo-crypto') : null;
 
 export async function sha256(source: Buffer | string): Promise<Buffer> {

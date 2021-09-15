@@ -1,4 +1,4 @@
-const nodeCrypto: (typeof import('crypto')) = typeof window === 'undefined' ? require('crypto') : null;
+const nodeCrypto: (typeof import('crypto')) = typeof window === 'undefined' ? require('c' + 'r' + 'y' + 'p' + 't' + 'o') : null;
 
 export async function pbkdf2_sha512(key: string | Buffer, salt: string | Buffer, iterations: number, keyLen: number): Promise<Buffer> {
     if (nodeCrypto) {

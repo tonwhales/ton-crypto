@@ -1,4 +1,4 @@
-const nodeCrypto: (typeof import('crypto')) = typeof window === 'undefined' ? require('crypto') : null;
+const nodeCrypto: (typeof import('crypto')) = typeof window === 'undefined' ? require('c' + 'r' + 'y' + 'p' + 't' + 'o') : null;
 
 export async function hmac_sha512(key: string | Buffer, data: string | Buffer): Promise<Buffer> {
     let keyBuffer: Buffer = typeof key === 'string' ? Buffer.from(key, 'utf-8') : key;

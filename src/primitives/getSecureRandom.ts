@@ -1,4 +1,4 @@
-const nodeCrypto: (typeof import('crypto')) = typeof window === 'undefined' ? require('crypto') : null;
+const nodeCrypto: (typeof import('crypto')) = typeof window === 'undefined' ? require('c' + 'r' + 'y' + 'p' + 't' + 'o') : null;
 const expoRandom: (typeof import('expo-random')) = (typeof navigator !== 'undefined' && navigator.product == 'ReactNative') ? require('expo-random') : null;
 
 export async function getSecureRandomBytes(size: number): Promise<Buffer> {
