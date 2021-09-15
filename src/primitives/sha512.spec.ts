@@ -1,5 +1,5 @@
 
-import { sha512 } from "./sha512";
+import { sha512, sha512_fallback } from "./sha512";
 
 // Test Vectors
 // https://www.di-mgt.com.au/sha_testvectors.html
@@ -16,6 +16,16 @@ describe('sha512', () => {
             let res = await sha512(vec.value);
             expect(res).toEqual(expected);
             res = await sha512(Buffer.from(vec.value, 'utf-8'));
+            expect(res).toEqual(expected);
+        }
+    });
+
+    it('should process test vectors for fallback', async () => {
+        for (let vec of VECTORS) {
+            let expected = Buffer.from(vec.output, 'hex');
+            let res = await sha512_fallback(vec.value);
+            expect(res).toEqual(expected);
+            res = await sha512_fallback(Buffer.from(vec.value, 'utf-8'));
             expect(res).toEqual(expected);
         }
     });
