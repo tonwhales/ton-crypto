@@ -27,8 +27,13 @@ require("buffer");
 ## React Native
 To make it work on react native some native modules are required:
 `
-expo install expo-crypto expo-random
+expo install expo-standard-web-crypto
 `
+
+```js
+import { polyfillWebCrypto } from 'expo-standard-web-crypto';
+polyfillWebCrypto();
+```
 
 ## Hashing
 All methods accept strings or Buffers as arguments.

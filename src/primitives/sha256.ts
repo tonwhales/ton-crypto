@@ -1,4 +1,4 @@
-import sjcl from 'sjcl';
+import jsSHA from 'jssha';
 import { getEngine } from "./getEngine";
 
 export async function sha256_fallback(source: Buffer | string): Promise<Buffer> {
@@ -8,9 +8,11 @@ export async function sha256_fallback(source: Buffer | string): Promise<Buffer> 
     } else {
         src = source.toString('hex');
     }
-    var bitArray = sjcl.codec.hex.toBits(src);
-    let hash = sjcl.hash.sha256.hash(bitArray);
-    return Buffer.from(sjcl.codec.hex.fromBits(hash), 'hex');
+
+    let hasher = new jsSHA('SHA-256', 'HEX');
+    hasher.update(src);
+    let res = hasher.getHash('HEX');
+    return Buffer.from(res, 'hex');
 }
 
 export async function sha256(source: Buffer | string): Promise<Buffer> {

@@ -1,5 +1,5 @@
 
-import { hmac_sha512 } from "./hmac_sha512";
+import { hmac_sha512, hmac_sha512_fallback } from "./hmac_sha512";
 
 // Test Vectors
 // https://datatracker.ietf.org/doc/html/rfc4231
@@ -25,6 +25,12 @@ describe('hmac_sha512', () => {
     it('should process test vectors', async () => {
         for (let vec of VECTORS) {
             let res = await hmac_sha512(vec.key, vec.data);
+            expect(res).toEqual(vec.output);
+        }
+    });
+    it('should process test vectors fallback', async () => {
+        for (let vec of VECTORS) {
+            let res = await hmac_sha512_fallback(vec.key, vec.data);
             expect(res).toEqual(vec.output);
         }
     });
