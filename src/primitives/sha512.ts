@@ -9,7 +9,7 @@ export async function sha512_fallback(source: Buffer | string): Promise<Buffer> 
         src = source.toString('hex');
     }
     var bitArray = sjcl.codec.hex.toBits(src);
-    let hash = sjcl.hash.sha256.hash(bitArray);
+    let hash = sjcl.hash.sha512.hash(bitArray);
     return Buffer.from(sjcl.codec.hex.fromBits(hash), 'hex');
 }
 
