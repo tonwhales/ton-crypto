@@ -1,25 +1,30 @@
-const nodeCrypto: (typeof import('crypto')) = typeof window === 'undefined' ? require('c' + 'r' + 'y' + 'p' + 't' + 'o') : null;
-const expoRandom: (typeof import('expo-random')) = (typeof navigator !== 'undefined' && navigator.product == 'ReactNative') ? require('expo-random') : null;
+import { getEngine } from './getEngine';
 
 export async function getSecureRandomBytes(size: number): Promise<Buffer> {
-    if (nodeCrypto) {
-        return nodeCrypto.randomBytes(size);
-    } if (expoRandom) {
-        return Buffer.from(await expoRandom.getRandomBytesAsync(size));
-    } else {
+    let engine = getEngine();
+    if (engine.type === 'node') {
+        return engine.crypto.randomBytes(size);
+    } else if (engine.type === 'browser') {
         return Buffer.from(window.crypto.getRandomValues(new Uint8Array(size)));
+    } else if (engine.type === 'expo') {
+        return Buffer.from(await engine.random.getRandomBytesAsync(size));
+    } else {
+        throw Error('Unsupported');
     }
 }
 
 export async function getSecureRandomWords(size: number): Promise<Uint16Array> {
-    if (nodeCrypto) {
+    let engine = getEngine();
+    if (engine.type === 'node') {
         let res = new Uint16Array(size);
-        nodeCrypto.randomFillSync(res);
+        engine.crypto.randomFillSync(res);
         return res;
-    } else if (expoRandom) {
-        let buffer = Buffer.from(await expoRandom.getRandomBytesAsync(size * 2));
+    } else if (engine.type === 'browser') {
+        return window.crypto.getRandomValues(new Uint16Array(size));
+    } else if (engine.type === 'expo') {
+        let buffer = Buffer.from(await engine.random.getRandomBytesAsync(size * 2));
         return new Uint16Array(buffer, 0, size * 2);
     } else {
-        return window.crypto.getRandomValues(new Uint16Array(size));
+        throw Error('Unsupported');
     }
 }
