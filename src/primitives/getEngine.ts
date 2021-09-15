@@ -1,4 +1,4 @@
-export function getEngine(): { type: 'browser' } | { type: 'node', crypto: typeof import('crypto') } | { type: 'expo', random: any } {
+export function getEngine(): { type: 'browser' } | { type: 'node', crypto: typeof import('crypto') } | { type: 'fallback' } {
     if (typeof window === 'undefined') {
         let pname = '';
         let x = ['c', 'r', 'y', 'p', 'to']
@@ -6,8 +6,6 @@ export function getEngine(): { type: 'browser' } | { type: 'node', crypto: typeo
             pname += x[i];
         };
         return { type: 'node', crypto: require(pname) };
-    } else if (typeof navigator !== 'undefined' && navigator.product == 'ReactNative') {
-        return { type: 'expo', random: require('expo-random') };
     } else {
         return { type: 'browser' };
     }

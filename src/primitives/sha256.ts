@@ -1,6 +1,18 @@
 import sjcl from 'sjcl';
 import { getEngine } from "./getEngine";
 
+export async function sha256_fallback(source: Buffer | string): Promise<Buffer> {
+    let src: string;
+    if (typeof source === 'string') {
+        src = Buffer.from(source, 'utf-8').toString('hex');
+    } else {
+        src = source.toString('hex');
+    }
+    var bitArray = sjcl.codec.hex.toBits(src);
+    let hash = sjcl.hash.sha256.hash(bitArray);
+    return Buffer.from(sjcl.codec.hex.fromBits(hash), 'hex');
+}
+
 export async function sha256(source: Buffer | string): Promise<Buffer> {
     const engine = getEngine();
     if (engine.type === 'node') {
@@ -10,17 +22,6 @@ export async function sha256(source: Buffer | string): Promise<Buffer> {
             return Buffer.from(await crypto.subtle.digest("SHA-256", Buffer.from(source, 'utf-8')));
         }
         return Buffer.from(await crypto.subtle.digest("SHA-256", source));
-    } else if (engine.type === 'expo') {
-        let src: string;
-        if (typeof source === 'string') {
-            src = Buffer.from(source, 'utf-8').toString('base64');
-        } else {
-            src = source.toString('base64');
-        }
-        var bitArray = sjcl.codec.base64.toBits(src);
-        let hash = sjcl.hash.sha256.hash(bitArray);
-        return Buffer.from(sjcl.codec.base64.fromBits(hash), 'base64');
-    } else {
-        throw Error('Unsupported');
     }
+    return sha256_fallback(source);
 }

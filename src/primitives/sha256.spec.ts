@@ -1,5 +1,5 @@
 
-import { sha256 } from "./sha256";
+import { sha256, sha256_fallback } from "./sha256";
 
 // Test Vectors
 // https://www.di-mgt.com.au/sha_testvectors.html
@@ -16,6 +16,16 @@ describe('sha256', () => {
             let res = await sha256(vec.value);
             expect(res).toEqual(expected);
             res = await sha256(Buffer.from(vec.value, 'utf-8'));
+            expect(res).toEqual(expected);
+        }
+    });
+
+    it('should process test vectors for fallback', async () => {
+        for (let vec of VECTORS) {
+            let expected = Buffer.from(vec.output, 'hex');
+            let res = await sha256_fallback(vec.value);
+            expect(res).toEqual(expected);
+            res = await sha256_fallback(Buffer.from(vec.value, 'utf-8'));
             expect(res).toEqual(expected);
         }
     });
