@@ -142,7 +142,7 @@ export async function mnemonicNew(wordsCount: number = 24, password?: string | n
         // Regenerate new mnemonics
         mnemonicArray = [];
         for (let i = 0; i < wordsCount; i++) {
-            let ind = await getSecureRandomNumber(0, wordlist.length - 1);
+            let ind = await getSecureRandomNumber(0, wordlist.length);
             mnemonicArray.push(wordlist[ind]);
         }
 
