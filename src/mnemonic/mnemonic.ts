@@ -1,5 +1,5 @@
 import nacl from 'tweetnacl';
-import { getSecureRandomWords } from '../primitives/getSecureRandom';
+import { getSecureRandomNumber } from '../primitives/getSecureRandom';
 import { hmac_sha512 } from '../primitives/hmac_sha512';
 import { KeyPair } from '../primitives/nacl';
 import { pbkdf2_sha512 } from '../primitives/pbkdf2_sha512';
@@ -141,9 +141,9 @@ export async function mnemonicNew(wordsCount: number = 24, password?: string | n
 
         // Regenerate new mnemonics
         mnemonicArray = [];
-        const rnd = await getSecureRandomWords(wordsCount);
         for (let i = 0; i < wordsCount; i++) {
-            mnemonicArray.push(wordlist[rnd[i] & 2047]); // We loose 5 out of 16 bits of entropy here, good enough
+            let ind = await getSecureRandomNumber(0, wordlist.length - 1);
+            mnemonicArray.push(wordlist[ind]);
         }
 
         // Chek password conformance

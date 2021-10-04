@@ -27,3 +27,14 @@ export async function getSecureRandomWords(size: number): Promise<Uint16Array> {
         throw Error('Unsupported');
     }
 }
+
+export async function getSecureRandomNumber(min: number, max: number) {
+    while (true) {
+        let res = (await getSecureRandomWords(1))[0];
+        let range = max - min;
+        if (res > range) {
+            continue;
+        }
+        return res + min;
+    }
+}
