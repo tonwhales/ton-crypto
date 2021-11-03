@@ -27,6 +27,10 @@ export function sign(data: Buffer, secretKey: Buffer) {
     return Buffer.from(nacl.sign.detached(new Uint8Array(data), new Uint8Array(secretKey)));
 }
 
+export function signVerify(data: Buffer, signature: Buffer, publicKey: Buffer) {
+    return nacl.sign.detached.verify(new Uint8Array(data), new Uint8Array(signature), new Uint8Array(publicKey));
+}
+
 export function sealBox(data: Buffer, nonce: Buffer, key: Buffer) {
     return Buffer.from(nacl.secretbox(data, nonce, key));
 }

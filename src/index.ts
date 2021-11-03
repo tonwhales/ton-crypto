@@ -6,6 +6,6 @@ export { getSecureRandomBytes, getSecureRandomWords, getSecureRandomNumber } fro
 export { mnemonicNew, mnemonicValidate, mnemonicToPrivateKey, mnemonicToWalletKey, mnemonicToSeed } from './mnemonic/mnemonic';
 export { wordlist as mnemonicWordList } from './mnemonic/wordlist';
 export { KeyPair, sealBox, openBox, keyPairFromSeed } from './primitives/nacl';
-export { keyPairFromSecretKey, sign } from './primitives/nacl';
+export { keyPairFromSecretKey, sign, signVerify } from './primitives/nacl';
 export { newSecureWords } from './passwords/newSecureWords';
 export { newSecurePassphrase } from './passwords/newSecurePassphrase';
