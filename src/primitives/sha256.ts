@@ -1,5 +1,5 @@
 import jsSHA from 'jssha';
-import { getEngine } from "./getEngine";
+import { sha256 as internal } from 'ton-crypto-primitives';
 
 export async function sha256_fallback(source: Buffer | string): Promise<Buffer> {
     let src: string;
@@ -15,15 +15,6 @@ export async function sha256_fallback(source: Buffer | string): Promise<Buffer> 
     return Buffer.from(res, 'hex');
 }
 
-export async function sha256(source: Buffer | string): Promise<Buffer> {
-    const engine = getEngine();
-    if (engine.type === 'node') {
-        return engine.crypto.createHash('sha256').update(source).digest();
-    } else if (engine.type === 'browser') {
-        if (typeof source === 'string') {
-            return Buffer.from(await crypto.subtle.digest("SHA-256", Buffer.from(source, 'utf-8')));
-        }
-        return Buffer.from(await crypto.subtle.digest("SHA-256", source));
-    }
-    return sha256_fallback(source);
+export function sha256(source: Buffer | string): Promise<Buffer> {
+    return internal(source);
 }

@@ -3969,6 +3969,13 @@ toidentifier@1.0.0:
   resolved "https://registry.yarnpkg.com/toidentifier/-/toidentifier-1.0.0.tgz#7e1be3470f1e77948bc43d94a3c8f4d7752ba553"
   integrity sha512-yaOH/Pk/VEhBWWTlhI+qXxDFXlejDGcQipMlyxda9nthulaxLZUNcUqFxokp0vcYnvteJln5FNQDRrxj3YcbVw==
 
+ton-crypto-primitives@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ton-crypto-primitives/-/ton-crypto-primitives-1.0.1.tgz#c16c634c10c95ee3ec1356c542ccafbdbfb4b597"
+  integrity sha512-DUu5wlheatjDCq3ZpdHq7lUchtquUW/2x3ivL6P3o/8qapT4Or0j67OSPNVRbVvp7lwa97bHvuOnzPVWItOc9g==
+  dependencies:
+    jssha "3.2.0"
+
 tough-cookie@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-4.0.0.tgz#d822234eeca882f991f0f908824ad2622ddbece4"

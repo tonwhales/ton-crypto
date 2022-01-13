@@ -1,31 +1,14 @@
-import { getEngine } from './getEngine';
+import {
+    getSecureRandomBytes as internalBytes,
+    getSecureRandomWords as internalWords
+} from 'ton-crypto-primitives';
 
 export async function getSecureRandomBytes(size: number): Promise<Buffer> {
-    let engine = getEngine();
-    if (engine.type === 'node') {
-        return engine.crypto.randomBytes(size);
-    } else if (engine.type === 'browser') {
-        return Buffer.from(window.crypto.getRandomValues(new Uint8Array(size)));
-    } else if (engine.type === 'fallback') {
-        return Buffer.from(window.crypto.getRandomValues(new Uint8Array(size)));
-    } else {
-        throw Error('Unsupported');
-    }
+    return internalBytes(size);
 }
 
 export async function getSecureRandomWords(size: number): Promise<Uint16Array> {
-    let engine = getEngine();
-    if (engine.type === 'node') {
-        let res = new Uint16Array(size);
-        engine.crypto.randomFillSync(res);
-        return res;
-    } else if (engine.type === 'browser') {
-        return window.crypto.getRandomValues(new Uint16Array(size));
-    } else if (engine.type === 'fallback') {
-        return window.crypto.getRandomValues(new Uint16Array(size));
-    } else {
-        throw Error('Unsupported');
-    }
+    return getSecureRandomWords(size);
 }
 
 export async function getSecureRandomNumber(min: number, max: number) {
