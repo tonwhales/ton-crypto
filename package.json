@@ -5,7 +5,6 @@
   "author": "Steve Korshakov <steve@korshakov.com>",
   "license": "MIT",
   "main": "dist/index.js",
-  "react-native": "dist/native.js",
   "files": [
     "dist"
   ],
