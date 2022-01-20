@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "jssha": "3.2.0",
-    "ton-crypto-primitives": "1.0.1",
+    "ton-crypto-primitives": "2.0.0",
     "tweetnacl": "1.0.3"
   }
 }
