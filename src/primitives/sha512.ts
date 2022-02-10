@@ -1,7 +1,7 @@
 import jsSHA from 'jssha'
 import { sha512 as internal } from 'ton-crypto-primitives';
 
-export async function sha512_fallback(source: Buffer | string): Promise<Buffer> {
+export function sha512_sync(source: Buffer | string): Buffer {
     let src: string;
     if (typeof source === 'string') {
         src = Buffer.from(source, 'utf-8').toString('hex');
@@ -13,6 +13,10 @@ export async function sha512_fallback(source: Buffer | string): Promise<Buffer> 
     hasher.update(src);
     let res = hasher.getHash('HEX');
     return Buffer.from(res, 'hex');
+}
+
+export async function sha512_fallback(source: Buffer | string): Promise<Buffer> {
+    return sha512_sync(source);
 }
 
 export async function sha512(source: Buffer | string): Promise<Buffer> {
