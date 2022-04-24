@@ -57,8 +57,7 @@ export async function mnemonicToSeed(mnemonicArray: string[], seed: string, pass
     //   return hash;
     // }
     const entropy = await mnemonicToEntropy(mnemonicArray, password);
-    const res = await pbkdf2_sha512(entropy, seed, PBKDF_ITERATIONS, 64);
-    return res.slice(0, 32);
+    return await pbkdf2_sha512(entropy, seed, PBKDF_ITERATIONS, 64);
 }
 
 /**
@@ -74,7 +73,7 @@ export async function mnemonicToPrivateKey(mnemonicArray: string[], password?: s
     // }
     mnemonicArray = normalizeMnemonic(mnemonicArray);
     const seed = (await mnemonicToSeed(mnemonicArray, 'TON default seed', password));
-    let keyPair = nacl.sign.keyPair.fromSeed(seed);
+    let keyPair = nacl.sign.keyPair.fromSeed(seed.slice(0, 32));
     return {
         publicKey: Buffer.from(keyPair.publicKey),
         secretKey: Buffer.from(keyPair.secretKey)
