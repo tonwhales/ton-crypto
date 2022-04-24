@@ -9,3 +9,5 @@ export { KeyPair, sealBox, openBox, keyPairFromSeed } from './primitives/nacl';
 export { keyPairFromSecretKey, sign, signVerify } from './primitives/nacl';
 export { newSecureWords } from './passwords/newSecureWords';
 export { newSecurePassphrase } from './passwords/newSecurePassphrase';
+export { HDKeysState } from './hd/state';
+export { getED25519MasterKeyFromSeed, deriveED25519HardenedKey, deriveEd25519Path } from './hd/ed25519';
