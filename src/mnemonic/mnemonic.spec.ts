@@ -1,5 +1,6 @@
 import { mnemonicNew } from "..";
-import { mnemonicToPrivateKey, mnemonicToWalletKey, mnemonicValidate } from "./mnemonic";
+import { getSecureRandomBytes } from "../primitives/getSecureRandom";
+import { mnemonicFromRandomSeed, mnemonicToPrivateKey, mnemonicToWalletKey, mnemonicValidate } from "./mnemonic";
 const testVectors = [
     {
         mnemonics: ['hospital', 'stove', 'relief', 'fringe', 'tongue', 'always', 'charge', 'angry', 'urge',
@@ -90,5 +91,8 @@ describe('mnemonic', () => {
             expect(key.secretKey.toString('hex')).toEqual(wk.secretKey.toString('hex'));
             expect(key.publicKey.toString('hex')).toEqual(wk.publicKey.toString('hex'));
         }
+    });
+    it('should generate mnemonics from random seed', async () => {
+        await mnemonicFromRandomSeed(await getSecureRandomBytes(32));
     });
 });

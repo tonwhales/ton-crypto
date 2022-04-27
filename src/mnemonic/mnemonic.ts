@@ -3,6 +3,8 @@ import { getSecureRandomNumber } from '../primitives/getSecureRandom';
 import { hmac_sha512 } from '../primitives/hmac_sha512';
 import { KeyPair } from '../primitives/nacl';
 import { pbkdf2_sha512 } from '../primitives/pbkdf2_sha512';
+import { sha512 } from '../primitives/sha512';
+import { bitsToBytes, bytesToBits, lpad } from '../utils/binary';
 import { wordlist } from './wordlist';
 
 const PBKDF_ITERATIONS = 100000;
@@ -170,4 +172,76 @@ export async function mnemonicNew(wordsCount: number = 24, password?: string | n
         break;
     }
     return mnemonicArray;
+}
+
+/**
+ * Converts bytes to mnemonics array (could be invalid for TON)
+ * @param src source buffer
+ * @param wordsCount number of words
+ */
+export function bytesToMnemonicIndexes(src: Buffer, wordsCount: number) {
+    let bits = bytesToBits(src);
+    let indexes: number[] = [];
+    for (let i = 0; i < wordsCount; i++) {
+        let sl = bits.slice(i * 11, i * 11 + 11);
+        indexes.push(parseInt(sl, 2));
+    }
+    return indexes;
+}
+
+export function bytesToMnemonics(src: Buffer, wordsCount: number) {
+    let mnemonics = bytesToMnemonicIndexes(src, wordsCount);
+    let res: string[] = [];
+    for (let m of mnemonics) {
+        res.push(wordlist[m]);
+    }
+    return res;
+}
+
+/**
+ * Converts mnemonics indexes to buffer with zero padding in the end
+ * @param src source indexes
+ * @returns Buffer
+ */
+export function mnemonicIndexesToBytes(src: number[]) {
+    let res = '';
+    for (let s of src) {
+        if (!Number.isSafeInteger(s)) {
+            throw Error('Invalid input');
+        }
+        if (s < 0 || s >= 2028) {
+            throw Error('Invalid input');
+        }
+        res += lpad(s.toString(2), '0', 11);
+    }
+    while (res.length % 8 !== 0) {
+        res = res + '0';
+    }
+    return bitsToBytes(res);
+}
+
+/**
+ * Generates deterministically mnemonics
+ * @param seed 
+ * @param wordsCount 
+ * @param password 
+ */
+export async function mnemonicFromRandomSeed(seed: Buffer, wordsCount: number = 24, password?: string | null | undefined) {
+    const bytesLength = Math.ceil(wordsCount * 11 / 8);
+    let currentSeed = seed;
+    while (true) {
+
+        // Create entropy
+        let entropy = await pbkdf2_sha512(seed, 'TON mnemonic seed', Math.max(1, Math.floor(PBKDF_ITERATIONS / 256)), bytesLength);
+
+        // Create mnemonics
+        let mnemonics = bytesToMnemonics(entropy, wordsCount);
+
+        // Check if mnemonics are valid
+        if (!await mnemonicValidate(mnemonics, password)) {
+            return mnemonics;
+        }
+
+        currentSeed = entropy;
+    }
 }

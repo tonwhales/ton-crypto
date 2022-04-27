@@ -20,3 +20,4 @@ export { keyPairFromSeed, keyPairFromSecretKey, sign, signVerify } from './primi
 export { HDKeysState } from './hd/state';
 export { getED25519MasterKeyFromSeed, deriveED25519HardenedKey, deriveEd25519Path } from './hd/ed25519';
 export { getSymmetricMasterKeyFromSeed, deriveSymmetricHardenedKey, deriveSymmetricPath } from './hd/symmetric';
+export { deriveMnemonicsPath, deriveMnemonicHardenedKey, getMnemonicsMasterKeyFromSeed } from './hd/mnemonics';
