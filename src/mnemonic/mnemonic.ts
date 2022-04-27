@@ -97,6 +97,17 @@ export async function mnemonicToWalletKey(mnemonicArray: string[], password?: st
 }
 
 /**
+ * Convert mnemonics to HD seed
+ * @param mnemonicArray mnemonic array
+ * @param password mnemonic password
+ * @returns 64 byte seed
+ */
+export async function mnemonicToHDSeed(mnemonicArray: string[], password?: string | null | undefined): Promise<Buffer> {
+    mnemonicArray = normalizeMnemonic(mnemonicArray);
+    return (await mnemonicToSeed(mnemonicArray, 'TON HD Keys seed', password));
+}
+
+/**
  * Validate Mnemonic
  * @param mnemonicArray mnemonic array
  * @param password mnemonic password
