@@ -3,7 +3,6 @@ import { getSecureRandomNumber } from '../primitives/getSecureRandom';
 import { hmac_sha512 } from '../primitives/hmac_sha512';
 import { KeyPair } from '../primitives/nacl';
 import { pbkdf2_sha512 } from '../primitives/pbkdf2_sha512';
-import { sha512 } from '../primitives/sha512';
 import { bitsToBytes, bytesToBits, lpad } from '../utils/binary';
 import { wordlist } from './wordlist';
 
@@ -232,13 +231,13 @@ export async function mnemonicFromRandomSeed(seed: Buffer, wordsCount: number = 
     while (true) {
 
         // Create entropy
-        let entropy = await pbkdf2_sha512(seed, 'TON mnemonic seed', Math.max(1, Math.floor(PBKDF_ITERATIONS / 256)), bytesLength);
+        let entropy = await pbkdf2_sha512(currentSeed, 'TON mnemonic seed', Math.max(1, Math.floor(PBKDF_ITERATIONS / 256)), bytesLength);
 
         // Create mnemonics
         let mnemonics = bytesToMnemonics(entropy, wordsCount);
 
         // Check if mnemonics are valid
-        if (!await mnemonicValidate(mnemonics, password)) {
+        if (await mnemonicValidate(mnemonics, password)) {
             return mnemonics;
         }
 

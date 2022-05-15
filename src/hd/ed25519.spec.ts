@@ -71,7 +71,7 @@ const testVectors = [{
     }]
 }];
 
-describe('keys', () => {
+describe('ed25519', () => {
 
     // Root
     for (let v of testVectors) {
